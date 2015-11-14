@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
 
-	VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
+	VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
 	VALID_PHONE_REGEX = /[2-9]{1}[0-9]{9}/
 
 	before_validation do
