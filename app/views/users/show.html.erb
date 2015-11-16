@@ -7,4 +7,21 @@
       </h1>
     </section>
   </aside>
+    <div class="col-md-8">
+    <% if @user.events.any? %>
+      <h3><%= "#{@user.first_name}'s Events" %> (<%= @user.events.count %>)</h3>
+      <ol class="events">
+        <%= render @events %>
+      </ol>
+      <%= will_paginate @events %>
+    <% end %>
+    
+	<% unless @invitations.nil? %>
+      <h3><%= "#{@user.first_name}'s Invitations" %> </h3>
+      <ol class="events">
+        <%= render @invitations %>
+      </ol>
+      <%= will_paginate @events %>
+    <% end %>
+  </div>
 </div>

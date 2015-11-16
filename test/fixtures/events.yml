@@ -1,0 +1,22 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+latest:
+  title: Latest
+  location: MyString
+  start_time: 2015-11-15 15:13:21
+  end_time: 2015-11-15 15:13:21
+  public: false
+
+middlest:
+  title: Middlest
+  location: MyString
+  start_time: 2014-11-15 15:13:21
+  end_time: 2015-11-15 15:13:21
+  public: false
+  
+earliest:
+  title: Earliest
+  location: MyString
+  start_time: 2013-11-15 15:13:21
+  end_time: 2015-11-15 15:13:21
+  public: false

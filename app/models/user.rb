@@ -1,5 +1,8 @@
 class User < ActiveRecord::Base
 
+	has_many :events, dependent: :destroy
+	has_many :invitations
+
 	attr_accessor :remember_token
 
 	VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
@@ -21,9 +24,13 @@ class User < ActiveRecord::Base
 	
 	validates :phone, presence: true, length: { maximum: 10, minimum: 10 }, format: { with: VALID_PHONE_REGEX}, uniqueness: true
 	
-	validates :password, presence: true, length: { minimum: 6 }
+	validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
 	
 	has_secure_password
+	
+	def full_name
+		self.first_name + " " + self.last_name
+	end
 	
 	# Returns the hash digest of the given string.
   def User.digest(string)

@@ -1,0 +1,17 @@
+<% provide(:title, @event.title) %>
+<div class="row">
+
+    	<div class="col-md-8">
+        <%= @event.title%><br>
+        Created by <%= link_to @event.user.full_name, @event.user%><br>
+    	<%= @event.start_time%> - <%= @event.end_time%> <br>
+    	<%= @event.location%><br>
+    	<%= @event.description%><br>
+    	Invited users:<br>
+    	<% @event.invitations.each do |invitation|%>
+    		<% invited_user = User.find(invitation.user_id) %>
+			<%= link_to invited_user.full_name, invited_user %> (<%= "Not " unless invitation.accepted %>Going)
+    	<% end %>
+    	
+  </div>
+</div>
