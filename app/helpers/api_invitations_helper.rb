@@ -1,0 +1,2 @@
+module ApiInvitationsHelper
+end

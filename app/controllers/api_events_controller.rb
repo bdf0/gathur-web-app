@@ -1,0 +1,2 @@
+class ApiEventsController < ApplicationController
+end

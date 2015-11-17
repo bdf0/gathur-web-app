@@ -1,0 +1,2 @@
+class ApiInvitationsController < ApplicationController
+end

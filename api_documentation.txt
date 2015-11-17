@@ -1,0 +1,55 @@
+>>Authentication and Authorization
+
+Update/Get User's Authentication Token
+	host_url/api/users/authenticate?email=EMAIL&password=PASSWORD
+	This value should be stored locally so it can be used to authenticate
+	the logged in user
+	
+
+>>Working With Users
+
+Search For User:
+	host_url/api/users?type=SEARCH_TYPE&query=SEARCH_QUERY
+
+	*SEARCH_TYPE can be
+	-phone
+	-email
+	-id
+	
+Get The Current User
+	host_url/api/users/me?auth=AUTH_TOKEN
+	
+Create A New User
+	host_url/api/users/new?first=FIRSTNAME&last=LASTNAME&email=EMAIL&phone=PHONE
+	&password=PASSWORD
+
+Update User Information
+	host_url/api/users/update?auth=AUTH_TOKEN[&first_name=FIRSTNAME]
+	[&last_name=LASTNAME][&email=EMAIL][&phone=PHONE]
+
+Delete A User
+	host_url/api/users/delete
+
+
+>>Working With Events
+
+Get User's Created Events
+
+Create A New Event
+
+Update An Existing Event
+
+Delete An Event
+
+
+>>Working With Invitations
+
+Create An Invitation
+
+Accept or Decline An Invitation
+
+Get Invited Users For An Event
+
+Get All Invited Events For Current User
+
+Remove An Invitation

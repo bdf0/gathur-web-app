@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151115235601) do
+ActiveRecord::Schema.define(version: 20151117002859) do
 
   create_table "events", force: :cascade do |t|
     t.string   "title"
@@ -49,8 +49,10 @@ ActiveRecord::Schema.define(version: 20151115235601) do
     t.string   "password_digest"
     t.string   "remember_digest"
     t.boolean  "admin",           default: false
+    t.string   "auth_token"
   end
 
+  add_index "users", ["auth_token"], name: "index_users_on_auth_token"
   add_index "users", ["email"], name: "index_users_on_email", unique: true
   add_index "users", ["phone"], name: "index_users_on_phone", unique: true
 

@@ -13,5 +13,7 @@
 			<%= link_to invited_user.full_name, invited_user %> (<%= "Not " unless invitation.accepted %>Going)
     	<% end %>
     	
+    	<%= link_to "Add User", new_invitation_path(event_id: @event.id) %>
+    	
   </div>
 </div>

@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'invitations/new'
+
   get 'sessions/new'
 
   get 'users/new'
@@ -13,6 +15,19 @@ Rails.application.routes.draw do
   delete 'logout'  => 'sessions#destroy'
   resources :users
   resources :events
+  resources :invitations
+  
+  #user API routes
+  get 'api/users' => 'api_users#find'
+  get 'api/users/me' => 'api_users#current'
+  get 'api/users/authenticate' => 'api_users#update_authentication_token'
+  get 'api/users/new' => 'api_users#new'
+  get 'api/users/update' => 'api_users#update'
+  get 'api/users/delete' => 'api_users#destroy'
+  
+  #event API routes
+  
+  #invitation API routes
   
 
   # The priority is based upon order of creation: first created -> highest priority.
