@@ -51,11 +51,19 @@ Delete An Event
 >>Working With Invitations
 
 Create An Invitation
+	host_url/api/invitations/new?auth=AUTH_TOKEN&event_id=ID&[phone=PHONE] or 		
+	[email=EMAIL]
 
 Accept or Decline An Invitation
+	host_url/api/invitations/toggle?auth=AUTH_TOKEN&event_id=ID
 
 Get Invited Users For An Event
+	host_url/api/invitations/event?auth=AUTH_TOKEN&event_id=ID
 
 Get All Invited Events For Current User
+	host_url/api/invitations?auth=AUTH_TOKEN
 
 Remove An Invitation
+	host_url/api/delete?auth=AUTH_TOKEN&inv_id=ID
+
+&title=SampleEvent&location=Nowhere&start_time=2015-01-01 06:00:00.000000&end_time=2016-01-01 06:00:00.000000

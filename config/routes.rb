@@ -32,6 +32,11 @@ Rails.application.routes.draw do
   get 'api/events/delete' => 'api_events#destroy'
   
   #invitation API routes
+  get 'api/invitations/new' => 'api_invitations#new'
+  get 'api/invitations/toggle' => 'api_invitations#toggle'
+  get 'api/invitations/event' => 'api_invitations#show'
+  get 'api/invitations' => 'api_invitations#mine'
+  get 'api/invitations/delete' => 'api_invitations#destroy'
   
 
   # The priority is based upon order of creation: first created -> highest priority.
