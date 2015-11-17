@@ -42,14 +42,22 @@ class ApiInvitationsController < ApplicationController
 		@invitation = Invitation.find(params[:inv_id])
 		if @invitation.event.user_id == current_user.id
 			render :json => @invitation.destroy
+		elsif @invitation.user_id == current_user.id
+			render :json => @invitation.destroy
 		else
 			render :json => nil
 		end
 	end
 
 	private
+	def authenticate_token
+    authenticate_with_http_token do |token, options|
+      User.find_by(auth_token: token)
+    end
+  end
+	
 	def current_user
-		User.find_by('auth_token' => params[:auth])
+		authenticate_token
 	end
 	
 	def current_event

@@ -1,6 +1,6 @@
 class Event < ActiveRecord::Base
   belongs_to :user
-  has_many :invitations
+  has_many :invitations, dependent: :destroy
   
   default_scope -> { order(:start_time) }
   
@@ -14,6 +14,6 @@ class Event < ActiveRecord::Base
   
   validates :end_time, presence: true
   
-  validates_date :end_time, after: :start_time
+  validates_time :end_time, after: :start_time
   
 end

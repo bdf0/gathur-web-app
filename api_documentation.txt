@@ -1,7 +1,7 @@
 >>Authentication and Authorization
 
 Update/Get User's Authentication Token
-	host_url/api/users/authenticate?email=EMAIL&password=PASSWORD
+	GET host_url/api/users/authenticate?email=EMAIL&password=PASSWORD
 	This value should be stored locally so it can be used to authenticate
 	the logged in user
 	
@@ -9,26 +9,31 @@ Update/Get User's Authentication Token
 >>Working With Users
 
 Search For User:
-	host_url/api/users?type=SEARCH_TYPE&query=SEARCH_QUERY
+	GET host_url/api/users?type=SEARCH_TYPE&query=SEARCH_QUERY
+	Requires Authentication Token
 
 	*SEARCH_TYPE can be
 	-phone
 	-email
-	-id
+
 	
 Get The Current User
-	host_url/api/users/me?auth=AUTH_TOKEN
+	GET host_url/api/users/me
+	Requires Authentication Token
 	
 Create A New User
 	host_url/api/users/new?first=FIRSTNAME&last=LASTNAME&email=EMAIL&phone=PHONE
 	&password=PASSWORD
 
 Update User Information
-	host_url/api/users/update?auth=AUTH_TOKEN[&first_name=FIRSTNAME]
-	[&last_name=LASTNAME][&email=EMAIL][&phone=PHONE]
+	host_url/api/users/update?[&first_name=FIRSTNAME][&last_name=LASTNAME]
+	[&email=EMAIL][&phone=PHONE]
+	Requires Authentication Token
 
 Delete A User
-	host_url/api/users/delete?auth=AUTH_TOKEN
+	host_url/api/users/delete
+	Requires Authentication Token
+	
 	Deletes the user and returns the object that was deleted
 
 
@@ -65,5 +70,3 @@ Get All Invited Events For Current User
 
 Remove An Invitation
 	host_url/api/delete?auth=AUTH_TOKEN&inv_id=ID
-
-&title=SampleEvent&location=Nowhere&start_time=2015-01-01 06:00:00.000000&end_time=2016-01-01 06:00:00.000000

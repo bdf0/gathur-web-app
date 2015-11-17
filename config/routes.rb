@@ -20,23 +20,24 @@ Rails.application.routes.draw do
   #user API routes
   get 'api/users' => 'api_users#find'
   get 'api/users/me' => 'api_users#current'
-  get 'api/users/authenticate' => 'api_users#update_authentication_token'
-  get 'api/users/new' => 'api_users#new'
-  get 'api/users/update' => 'api_users#update'
-  get 'api/users/delete' => 'api_users#destroy'
+  post 'api/users/authenticate' => 'api_users#create_authentication_token'
+  get 'api/users/authenticate' => 'api_users#get_authentication_token'
+  post 'api/users' => 'api_users#new'
+  patch 'api/users' => 'api_users#update'
+  delete 'api/users' => 'api_users#destroy'
   
   #event API routes
   get 'api/events' => 'api_events#find'
-  get 'api/events/new' => 'api_events#new'
-  get 'api/events/update' => 'api_events#update'
-  get 'api/events/delete' => 'api_events#destroy'
+  post 'api/events' => 'api_events#new'
+  patch 'api/events' => 'api_events#update'
+  delete 'api/events' => 'api_events#destroy'
   
   #invitation API routes
-  get 'api/invitations/new' => 'api_invitations#new'
-  get 'api/invitations/toggle' => 'api_invitations#toggle'
+  post 'api/invitations' => 'api_invitations#new'
+  post 'api/invitations/toggle' => 'api_invitations#toggle'
   get 'api/invitations/event' => 'api_invitations#show'
   get 'api/invitations' => 'api_invitations#mine'
-  get 'api/invitations/delete' => 'api_invitations#destroy'
+  delete 'api/invitations' => 'api_invitations#destroy'
   
 
   # The priority is based upon order of creation: first created -> highest priority.
