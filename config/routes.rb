@@ -26,6 +26,10 @@ Rails.application.routes.draw do
   get 'api/users/delete' => 'api_users#destroy'
   
   #event API routes
+  get 'api/events' => 'api_events#find'
+  get 'api/events/new' => 'api_events#new'
+  get 'api/events/update' => 'api_events#update'
+  get 'api/events/delete' => 'api_events#destroy'
   
   #invitation API routes
   

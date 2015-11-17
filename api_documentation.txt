@@ -28,18 +28,24 @@ Update User Information
 	[&last_name=LASTNAME][&email=EMAIL][&phone=PHONE]
 
 Delete A User
-	host_url/api/users/delete
+	host_url/api/users/delete?auth=AUTH_TOKEN
+	Deletes the user and returns the object that was deleted
 
 
 >>Working With Events
 
 Get User's Created Events
+	host_url/api/events?auth=AUTH_TOKEN
 
 Create A New Event
+	host_url/api/events/new?auth=AUTH_TOKEN&title=TITLE&location=LOCATION
+	&start=START_TIME&end=END_TIME[&description=DESCRIPTION]
 
 Update An Existing Event
+	host_url/api/events/update?auth=AUTH_TOKEN&id=ID&[parameters]
 
 Delete An Event
+	host_url/api/events/delete?auth=AUTH_TOKEN&id=ID
 
 
 >>Working With Invitations
