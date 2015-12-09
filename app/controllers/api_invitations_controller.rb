@@ -5,10 +5,12 @@ class ApiInvitationsController < ApplicationController
 			@invited_user = User.find_by(email: params[:phone])
 			@invitation = current_event.invitations.create(user_id: @invited_user.id)
 			@invitation.update(accepted: false)
+			@invitation.update(display_name: "#{@invited_user.first_name} #{@invited_user.last_name}")
 		elsif current_event && params[:email]
 			@invited_user = User.find_by(email: params[:email])
 			@invitation = current_event.invitations.create(user_id: @invited_user.id)
 			@invitation.update(accepted: false)
+			@invitation.update(display_name: "#{@invited_user.first_name} #{@invited_user.last_name}")
 		else
 			@invitation = nil
 		end

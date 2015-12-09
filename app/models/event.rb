@@ -1,6 +1,7 @@
 class Event < ActiveRecord::Base
   belongs_to :user
   has_many :invitations, dependent: :destroy
+  has_many :messages, dependent: :destroy
   
   default_scope -> { order(:start_time) }
   

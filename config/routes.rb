@@ -39,6 +39,10 @@ Rails.application.routes.draw do
   get 'api/invitations' => 'api_invitations#mine'
   delete 'api/invitations' => 'api_invitations#destroy'
   
+  #message API routes
+  get 'api/messages' => 'api_messages#show'
+  post 'api/messages' => 'api_messages#new'
+  
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

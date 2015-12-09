@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151117040850) do
+ActiveRecord::Schema.define(version: 20151209193252) do
 
   create_table "events", force: :cascade do |t|
     t.string   "title"
@@ -32,13 +32,27 @@ ActiveRecord::Schema.define(version: 20151117040850) do
     t.boolean  "accepted"
     t.integer  "user_id"
     t.integer  "event_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.string   "display_name"
   end
 
   add_index "invitations", ["event_id"], name: "index_invitations_on_event_id"
   add_index "invitations", ["user_id", "event_id"], name: "index_invitations_on_user_id_and_event_id", unique: true
   add_index "invitations", ["user_id"], name: "index_invitations_on_user_id"
+
+  create_table "messages", force: :cascade do |t|
+    t.string   "text"
+    t.integer  "user_id"
+    t.integer  "event_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.string   "display_name"
+  end
+
+  add_index "messages", ["created_at"], name: "index_messages_on_created_at"
+  add_index "messages", ["event_id"], name: "index_messages_on_event_id"
+  add_index "messages", ["user_id"], name: "index_messages_on_user_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "first_name"
