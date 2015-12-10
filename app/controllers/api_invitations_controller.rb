@@ -2,7 +2,7 @@ class ApiInvitationsController < ApplicationController
 
 	def new
 		if current_event && params[:phone]
-			@invited_user = User.find_by(email: params[:phone])
+			@invited_user = User.find_by(phone: params[:phone])
 			@invitation = current_event.invitations.create(user_id: @invited_user.id)
 			@invitation.update(accepted: false)
 			@invitation.update(display_name: "#{@invited_user.first_name} #{@invited_user.last_name}")
