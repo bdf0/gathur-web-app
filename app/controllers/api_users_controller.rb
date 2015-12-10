@@ -23,7 +23,7 @@ class ApiUsersController < ApplicationController
 		@user = User.find_by('email' => params[:email])
 		if @user and @user.authenticate(params[:password])
 			set_auth_token(@user)
-			render :json => @user.auth_token
+			render :json => [token: @user.auth_token]
 		else
 			render :json => nil
 		end
@@ -35,7 +35,7 @@ class ApiUsersController < ApplicationController
 			if @user.auth_token.nil?
 				set_auth_token(@user)
 			end
-			render :json => @user.auth_token
+			render :json => [token: @user.auth_token]
 		else
 			render :json => nil
 		end
