@@ -1,125 +1,73 @@
-Gathur API
+>>Authentication and Authorization
 
-This API contains information for how to interact with the Gathur data model.
-https://github.com/bdf0/gathur-web-app
-
-Authentication and Authorization
-
-Update/Create User's Authentication Token
-POST
-https://gathur.herokuapp.com/api/users/authenticate?email=EMAIL&password=PASSWORD
-
-Get User's Authentication Token
-GET
-https://gathur.herokuapp.com/api/users/authenticate?email=EMAIL&password=PASSWORD
-
-All Gathur API calls require authentication, and for most calls this is accomplished by including an authentication token in the “Authorization” field of the HTTP header. The exceptions are creating a new user (obviously), and these calls, which can set and return a new authorization token or return the existing authorization token for the user with the given email/password combination. It is your responsibility to store this token locally so that future API calls can be authenticated.
+Update/Get User's Authentication Token
+	GET https://gathur.herokuapp.com/api/users/authenticate?email=EMAIL
+	&password=PASSWORD
+		This value should be stored locally so it can be used to authenticate
+	the logged in user
 	
 
-Working With Users
+>>Working With Users
 
 Search For User:
-GET
-https://gathur.herokuapp.com/api/users?type=SEARCH_TYPE&query=SEARCH_QUERY
-Requires Authentication Token - Logged in Users Only
+	GET https://gathur.herokuapp.com/api/users?type=SEARCH_TYPE&query=SEARCH_QUERY
+	Requires Authentication Token
 
-Returns limited information about the user with the given email address or phone number. SEARCH_TYPE should be one of “phone”,“email” or “user_id” and QUERY should be the corresponding value to search. Email addresses should be all lower case, and phone numbers should have no spaces or punctuation.
+	*SEARCH_TYPE can be
+	-phone
+	-email
 
+	
 Get The Current User
-GET
-https://gathur.herokuapp.com/api/users/me
-Requires Authentication Token - Can Only See Own Info
-
-Returns information about the user with the provided authentication token (i.e., the “logged in” user)
+	GET https://gathur.herokuapp.com/api/users/me
+	Requires Authentication Token
 	
 Create A New User
-POST 
-https://gathur.herokuapp.com/api/users?first_name=FIRSTNAME&last_name=LASTNAME&email=EMAIL
-&phone=PHONE&password=PASSWORD
-
-Hopefully self explanatory. All fields required. You should handle password confirmation.
+	https://gathur.herokuapp.com/api/users/new?first=FIRSTNAME&last=LASTNAME&email=EMAIL&phone=PHONE
+	&password=PASSWORD
 
 Update User Information
-PATCH
-https://gathur.herokuapp.com/api/users?[first_name=FIRSTNAME][&last_name=LASTNAME]
-[&email=EMAIL][&phone=PHONE]
-Requires Authentication Token - Can Only Update Own Info
-
-All parameters are optional - i.e., only include the things you want to change.
+	https://gathur.herokuapp.com/api/users/update?[&first_name=FIRSTNAME][&last_name=LASTNAME]
+	[&email=EMAIL][&phone=PHONE]
+	Requires Authentication Token
 
 Delete A User
-DELETE
-https://gathur.herokuapp.com/api/users
-Requires Authentication Token - Can Only Delete Own Account
+	https://gathur.herokuapp.com/api/users/delete
+	Requires Authentication Token
 	
-Deletes the user and returns the object that was deleted in case you want to do some final operations with it. Note that deleting a user also deletes all of their created events. You should probably make this hard to do.
+	Deletes the user and returns the object that was deleted
 
 
-Working With Events
+>>Working With Events
 
 Get User's Created Events
-GET
-https://gathur.herokuapp.com/api/events
-Requires Authentication Token - Can Only See Own Events
-
-Returns a list of the user’s created events
+	https://gathur.herokuapp.com/api/events?auth=AUTH_TOKEN
 
 Create A New Event
-POST	https://gathur.herokuapp.com/api/events?title=TITLE&location=LOCATION&start_time=START_TIME&end_time=END_TIME[&description=DESCRIPTION]
-Requires Authentication Token - Determines Owner of Created Event
-
-Creates a new event with the given parameters. Note that start_time must be strictly earlier than end_time and that the description is optional.
+	https://gathur.herokuapp.com/api/events/new?auth=AUTH_TOKEN&title=TITLE&location=LOCATION
+	&start=START_TIME&end=END_TIME[&description=DESCRIPTION]
 
 Update An Existing Event
-PATCH
-https://gathur.herokuapp.com/api/events?event_id=ID[&title=TITLE][&location=LOCATION][&start_time=
-START_TIME][&end_time=END_TIME][&description=DESCRIPTION]
-Requires Authentication Token - Can Only Edit Own Events
+	https://gathur.herokuapp.com/api/events/update?auth=AUTH_TOKEN&id=ID&[parameters]
 
-Updates the information for an existing event. Note that you must provide the event’s unique ID number and that all other parameters are optional (i.e., only provide the information you want to change).
-
-
 Delete An Event
-DELETE
-https://gathur.herokuapp.com/api/events?event_id=ID
-Requires Authentication Token - Can Only Delete Own Events
-
-Deletes the event with the given ID and returns the object that was deleted.
+	https://gathur.herokuapp.com/api/events/delete?auth=AUTH_TOKEN&id=ID
 
 
-Working With Invitations
+>>Working With Invitations
 
 Create An Invitation
-POST
-https://gathur.herokuapp.com/api/invitations?event_id=ID&[phone=PHONE] or [email=EMAIL]
-Requires Authentication Token - Can Only Invite to Own Events
-
-Creates an invitation to the event with the given event_id. Designate the invited user with either an email address or phone number (but not both).
+	https://gathur.herokuapp.com/api/invitations/new?auth=AUTH_TOKEN&event_id=ID&[phone=PHONE] or 		
+	[email=EMAIL]
 
 Accept or Decline An Invitation
-POST
-https://gathur.herokuapp.com/api/invitations/toggle?event_id=ID
-Requires Authentication Token - Can Only Accept Own Invitations
-
-Toggles between “accepted” and “not accepted” states.
+	https://gathur.herokuapp.com/api/invitations/toggle?auth=AUTH_TOKEN&event_id=ID
 
 Get Invited Users For An Event
-GET
-https://gathur.herokuapp.com/api/invitations/event?event_id=ID
-Requires Authentication Token - Must Be Invited or Event Creator to View
-
-Returns a list of all invitations for a given event. Each invitation has a user_id that can be used to reference the user object.
+	https://gathur.herokuapp.com/api/invitations/event?auth=AUTH_TOKEN&event_id=ID
 
 Get All Invited Events For Current User
-GET
-https://gathur.herokuapp.com/api/invitations
-Requires Authentication Token - Can Only View Own Invitations
-
-Returns a list of all invitations sent to the current user.
+	https://gathur.herokuapp.com/api/invitations?auth=AUTH_TOKEN
 
 Remove An Invitation
-DELETE
-https://gathur.herokuapp.com/api?inv_id=ID
-Requires Authentication Token - Must Be the Event Owner or Invited User
-
-Removes the invitation with the given inv_id.
+	https://gathur.herokuapp.com/api/delete?auth=AUTH_TOKEN&inv_id=ID

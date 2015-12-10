@@ -15,6 +15,6 @@ class Event < ActiveRecord::Base
   
   validates :end_time, presence: true
   
-  validates_time :end_time, after: :start_time
+  validates_datetime :end_time, after: :start_time
   
 end
