@@ -9,7 +9,7 @@ class ApiEventsController < ApplicationController
 		if @event.save
 			render :json => @event
 		else
-			render :json => nil
+			head 400
 		end
 	end
 	
@@ -17,21 +17,23 @@ class ApiEventsController < ApplicationController
 		if current_user.events.exists? params[:event_id]
 			@event = current_user.events.find(params[:event_id])
 			@event.update_attributes(event_params)
+			render :json => @event
 		else
-			@event = nil
+			head 400
 		end
 		
-		render :json => @event
+		
 	end
 	
 	def destroy
 		if current_user.events.exists? params[:event_id]
 			@event = current_user.events.find(params[:event_id]).destroy
+			render :json => @event
 		else
-			@event = nil
+			head 400
 		end
 		
-		render :json => @event
+		
 	
 	end
 	
