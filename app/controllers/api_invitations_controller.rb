@@ -11,11 +11,13 @@ class ApiInvitationsController < ApplicationController
 			@invitation = current_event.invitations.create(user_id: @invited_user.id)
 			@invitation.update(accepted: false)
 			@invitation.update(display_name: "#{@invited_user.first_name} #{@invited_user.last_name}")
+			render :json => @invitation
+				
 		else
-			@invitation = nil
+			head 400
 		end
 		
-		render :json => @invitation
+
 	end
 	
 	def toggle

@@ -31,6 +31,7 @@ Rails.application.routes.draw do
   post 'api/events' => 'api_events#new'
   patch 'api/events' => 'api_events#update'
   delete 'api/events' => 'api_events#destroy'
+  get 'api/events/all' => 'api_events#all'
   
   #invitation API routes
   post 'api/invitations' => 'api_invitations#new'

@@ -20,9 +20,11 @@ class ApiEventsController < ApplicationController
 			render :json => @event
 		else
 			head 400
-		end
-		
-		
+		end	
+	end
+	
+	def all
+		render :json => Event.all
 	end
 	
 	def destroy
