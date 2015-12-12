@@ -37,7 +37,7 @@ class ApiUsersController < ApplicationController
 			end
 			render :json => [token: @user.auth_token]
 		else
-			render :json => nil
+			head 403
 		end
 	end
 	
