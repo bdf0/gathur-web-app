@@ -36,6 +36,18 @@ class ApiInvitationsController < ApplicationController
 		end
 	end
 	
+	def show_events
+		@user = current_user
+		@invitations = @user.invitations
+		@events = []
+		@invitations.each do |invitation|
+			@events.push invitation.event
+		end
+		
+		render :json => @events
+		
+	end
+	
 	def mine
 		render :json => current_user.invitations
 	end

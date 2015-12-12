@@ -38,6 +38,7 @@ Rails.application.routes.draw do
   get 'api/invitations/event' => 'api_invitations#show'
   get 'api/invitations' => 'api_invitations#mine'
   delete 'api/invitations' => 'api_invitations#destroy'
+  get 'api/events/invited/' => 'api_invitations#show_events'
   
   #message API routes
   get 'api/messages' => 'api_messages#show'
