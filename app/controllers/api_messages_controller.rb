@@ -2,7 +2,7 @@ class ApiMessagesController < ApplicationController
 
 	def show
 		@event = Event.find(params[:event_id])
-			render :json =>  @event.messages
+				render :json =>  @event.messages
 	end
 	
 	def new

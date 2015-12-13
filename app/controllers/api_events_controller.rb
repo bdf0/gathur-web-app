@@ -1,7 +1,12 @@
 class ApiEventsController < ApplicationController
 
 	def find
-		render :json =>  current_user.events
+		if current_user && params[:user_id] == current_user.id
+			render :json =>  current_user.events
+		else
+			@user = User.find(params[:user_id])
+			render :json => @user.events.where(public: true)
+		end
 	end
 	
 	def new
