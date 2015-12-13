@@ -6,9 +6,10 @@ class ApiUsersController < ApplicationController
 	
 	def find
 		if authenticate_token and VALID_TYPES.include? params[:type]
-		@user = User.find_by(params[:type] => params[:query])
+			@user = User.find_by(params[:type] => params[:query])
 		else
-			@user = nil
+			head 400
+			return
 		end
 		
 		render :json => secure_json(@user)

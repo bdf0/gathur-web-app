@@ -33,7 +33,7 @@ class ApiEventsController < ApplicationController
 	end
 	
 	def all
-		render :json => Event.where(public: true)
+		render :json => Event.where(public: true).order('created_at')
 	end
 	
 	def destroy
