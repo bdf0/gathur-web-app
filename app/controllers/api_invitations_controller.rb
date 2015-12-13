@@ -1,23 +1,19 @@
 class ApiInvitationsController < ApplicationController
 
 	def new
-		if current_event && params[:phone]
+		@event = current_event
+		if @event && params[:phone]
 			@invited_user = User.find_by(phone: params[:phone])
 			@invitation = current_event.invitations.create(user_id: @invited_user.id)
 			@invitation.update(accepted: false)
 			@invitation.update(display_name: "#{@invited_user.first_name} #{@invited_user.last_name}")
-		elsif current_event && params[:email]
+		elsif @event && params[:email]
 			@invited_user = User.find_by(email: params[:email])
 			@invitation = current_event.invitations.create(user_id: @invited_user.id)
 			@invitation.update(accepted: false)
 			@invitation.update(display_name: "#{@invited_user.first_name} #{@invited_user.last_name}")
 			render :json => @invitation
-		elsif current_event.public
-			@invited_user = current_user
-			@invitation = current_event.invitations.create(user_id: @invited_user.id)
-			@invitation.update(accepted: true)
-			@invitation.update(display_name: "#{@invited_user.first_name} #{@invited_user.last_name}")
-			render :json => @invitation
+
 		else
 			head 400
 		end
@@ -27,11 +23,28 @@ class ApiInvitationsController < ApplicationController
 	
 	def toggle
 		@event = Event.find(params[:event_id])
+		unless @event
+			head 400
+			return
+		end
+		
+		@user = current_user
 		@invitation = Invitation.find_by(user_id: current_user.id, event_id: @event.id)
-		@invitation |= self.new
-		@invitation.update(accepted: !@invitation.accepted) unless @invitation.nil?
+		
+		if @invitation
+			@invitation.update(accepted: !@invitation.accepted) 
+		elsif @event.public
+				@invited_user = current_user
+				@invitation = current_event.invitations.create(user_id: @invited_user.id)
+				@invitation.update(accepted: true)
+				@invitation.update(display_name: "#{@invited_user.first_name} #{@invited_user.last_name}")
+		else
+			head 400
+			return
+		end
 		
 		render :json => @invitation
+		
 	end
 
 	def show
