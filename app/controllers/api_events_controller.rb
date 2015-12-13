@@ -6,6 +6,9 @@ class ApiEventsController < ApplicationController
 	
 	def new
 		@event = current_user.events.new(event_params)
+		creator = User.find(@event.user_id)
+		name = "#{creator.first_name} #{creator.last_name}"
+		@event.update(creator_name: User.find(@event.user_id))
 		if @event.save
 			render :json => @event
 		else
