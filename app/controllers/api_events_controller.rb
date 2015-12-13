@@ -8,7 +8,8 @@ class ApiEventsController < ApplicationController
 		@event = current_user.events.new(event_params)
 		creator = User.find(@event.user_id)
 		name = "#{creator.first_name} #{creator.last_name}"
-		@event.update(creator_name: User.find(@event.user_id))
+		@event.update(creator_name: name)
+		@event.update(public: true)
 		if @event.save
 			render :json => @event
 		else
@@ -27,7 +28,7 @@ class ApiEventsController < ApplicationController
 	end
 	
 	def all
-		render :json => Event.all
+		render :json => Event.where(public: true)
 	end
 	
 	def destroy
