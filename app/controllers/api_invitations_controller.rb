@@ -7,11 +7,13 @@ class ApiInvitationsController < ApplicationController
 			@invitation = current_event.invitations.create(user_id: @invited_user.id)
 			@invitation.update(accepted: false)
 			@invitation.update(display_name: "#{@invited_user.first_name} #{@invited_user.last_name}")
+			@invitation.update(event_name: @invitation.event.title)
 		elsif @event && params[:email]
 			@invited_user = User.find_by(email: params[:email])
 			@invitation = current_event.invitations.create(user_id: @invited_user.id)
 			@invitation.update(accepted: false)
 			@invitation.update(display_name: "#{@invited_user.first_name} #{@invited_user.last_name}")
+			@invitation.update(event_name: @invitation.event.title)
 			render :json => @invitation
 
 		else
@@ -38,6 +40,7 @@ class ApiInvitationsController < ApplicationController
 				@invitation = current_event.invitations.create(user_id: @invited_user.id)
 				@invitation.update(accepted: true)
 				@invitation.update(display_name: "#{@invited_user.first_name} #{@invited_user.last_name}")
+				@invitation.update(event_name: @invitation.event.title)
 		else
 			head 400
 			return
