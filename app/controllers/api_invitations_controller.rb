@@ -78,7 +78,13 @@ class ApiInvitationsController < ApplicationController
 	end
 	
 	def my_accepted
-		render :json => current_user.invitations.where(accepted: true)
+		@events = []
+		@invitations = current_user.invitations.where(accepted: true)
+		@invitations.each do |inv|
+			@events << inv.event
+		end
+		
+		render :json => @events
 	end
 	
 	def destroy
