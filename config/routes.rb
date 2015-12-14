@@ -40,6 +40,7 @@ Rails.application.routes.draw do
   get 'api/invitations' => 'api_invitations#mine'
   delete 'api/invitations' => 'api_invitations#destroy'
   get 'api/events/invited/' => 'api_invitations#show_events'
+  get 'api/invitations/accepted' => 'api_invitations#my_accepted'
   
   #message API routes
   get 'api/messages' => 'api_messages#show'

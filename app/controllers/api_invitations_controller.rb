@@ -74,6 +74,10 @@ class ApiInvitationsController < ApplicationController
 		render :json => current_user.invitations
 	end
 	
+	def my_accepted
+		render :json => current_user.invitations.where(accepted: true)
+	end
+	
 	def destroy
 		@invitation = Invitation.find(params[:inv_id])
 		if @invitation.event.user_id == current_user.id
