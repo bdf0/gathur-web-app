@@ -51,7 +51,8 @@ class ApiInvitationsController < ApplicationController
 		@event = Event.find(params[:event_id])
 		@invitations = @event.invitations
 		if @invitations.include? Invitation.find_by(user_id: current_user.id, event_id: @event.id) or current_user.events.include? @event
-			render :json => @invitations
+			#render :json => @invitations
+			render :json => @invitations.where(accepted: true)
 		else
 			render :json => nil
 		end
